@@ -82,17 +82,19 @@ def read_from_timestamps():
         will use the final timestamp's description for this split.
     """
     line = sys.stdin.readline()
-    m = int(line[0:2])
-    s = int(line[3:5])
+    ci = line.index(":")
+    m = int(line[0:ci])
+    s = int(line[ci+1:ci+3])
     offset = t(m, s)
 
     descriptions = []
     times = []
     for line in sys.stdin.readlines():
-        m = int(line[0:2])
-        s = int(line[3:5])
+        ci = line.index(":")
+        m = int(line[0:ci])
+        s = int(line[ci+1:ci+3])
         times.append(t(m, s))
-        descriptions.append(line[6:-1])
+        descriptions.append(line[ci+4:-1])
 
     ending = times[-1]
     times = times[0:-2]
